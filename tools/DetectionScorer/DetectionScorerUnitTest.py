@@ -25,6 +25,8 @@ def unittestMetrics():
     # check points and AUC
     DM1 = dm.detMetrics(df1['score'], df1['gt'], fpr_stop=1, isCI=False, ciLevel=0.9)
     # scikit-learn Metrics
+    print(DM1.fpr, file=sys.stderr)
+    print(df1fpr, file=sys.stderr)
     np.testing.assert_almost_equal(DM1.fpr, df1fpr)
     np.testing.assert_almost_equal(DM1.tpr, df1tpr)
     # manual calculation by unique values

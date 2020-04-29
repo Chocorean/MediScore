@@ -35,7 +35,7 @@ run_test() {
 
 # Graph Building test 1_0
 test_1_0() {
-    python ./VideoTemporalLocalizationScoring.py -o "$1" \
+    python3 ./VideoTemporalLocalizationScoring.py -o "$1" \
                         -r "$testsuite_directory/test_case_1_videotemploc-ref.csv" \
                         -i "$testsuite_directory/test_case_1_videotemploc-index.csv" \
                         -j "$testsuite_directory/test_case_1_videotemploc-ref-journalmask.csv" \

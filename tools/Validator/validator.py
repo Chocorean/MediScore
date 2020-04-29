@@ -41,7 +41,7 @@ import cv2
 import numpy as np
 import pandas as pd
 import contextlib
-import StringIO
+from io import StringIO
 import subprocess
 import multiprocessing
 import ast
@@ -402,7 +402,7 @@ class SSD_Validator(validator):
         self.pixOptOut = 'ProbeOptOutPixelValue' in sysHeads
 
         headflag = True
-        for i in xrange(len(truelist)):
+        for i in range(len(truelist)):
             headcheck = truelist[i] in sysHeads
             if not headcheck:
                 print("ERROR: The required column {} is absent.".format(truelist[i]))
@@ -412,7 +412,7 @@ class SSD_Validator(validator):
     def rowCheck(self,sysfile,idxfile,pk_field,pk_field_list):
         rowFlag = 0
         if sysfile.shape[0] != sysfile.drop_duplicates().shape[0]:
-            rowlist = xrange(sysfile.shape[0])
+            rowlist = range(sysfile.shape[0])
             print(" ".join(["ERROR: Your system output contains duplicate rows for {}:".format(pk_field_list),
                   ' ,'.join(list(map(str,sysfile[pk_field][sysfile.duplicated()]))),"at row(s):",
                   ' ,'.join(list(map(str,[i for i in rowlist if sysfile.duplicated()[i]]))),"after the header. I recommended you delete these row(s)."]))
@@ -445,12 +445,14 @@ class SSD_Validator(validator):
         else:
             maskData = self.checkMoreProbes(maskData)
         #add all mask 'Message' entries to printBuffer
-        maskData.apply(lambda x: self.printbuffer.put(x['Message']),axis=1,reduce=False)
+        #maskData.apply(lambda x: self.printbuffer.put(x['Message']),axis=1,reduce=False)
+        maskData.apply(lambda x: self.printbuffer.put(x['Message']),axis=1,result_type='broadcast')
 
         return maskData
 
     def checkMoreProbes(self,maskData):
-        return maskData.apply(self.checkOneProbe,axis=1,reduce=False)
+        #return maskData.apply(self.checkOneProbe,axis=1,reduce=False)
+        return maskData.apply(self.checkOneProbe,axis=1,result_type='broadcast')
 
     #attach the flag to each row and send the row back
     def checkOneProbe(self,sysrow):
@@ -659,7 +661,7 @@ class SSD_Validator(validator):
                                 errmsg = "{msgtype}: Interval {intvl1} intersects with interval {intvl2}.".format(msgtype=msgtype,intvl1=interval,intvl2=intvl)
                                 msg.append(errmsg)
                     cleared_interval_list.append(interval)
-        except Exception,e:
+        except Exception as e:
 #            exc_type,exc_obj,exc_tb = sys.exc_info()
 #            print("Exception {} encountered at line {}.".format(exc_type,exc_tb.tb_lineno))
             msg.append("ERROR: Interval list '{}' cannot be read as intervals for column {} for probe {}.".format(intvl,column_name,probeFileID))

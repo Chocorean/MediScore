@@ -5,7 +5,7 @@ MAKE=make
 
 check:
 	@(echo "** Running UnitTests **\n")
-	(python Unittest_IntervalConfusion.py)
+	(python3 Unittest_IntervalConfusion.py)
 	@(echo "** Running Intergration Test Case **\n")
 	@(./run_integration_tests.sh)
 

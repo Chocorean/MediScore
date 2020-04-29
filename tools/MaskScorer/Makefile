@@ -4,12 +4,12 @@
 MAKE=make
 
 #check:
-#	(cd ../../lib; python2 -m unittest maskTests)
+#	(cd ../../lib; python3 -m unittest maskTests)
 #	(rm ../../lib/testImg*.png)
 #	(./maskcompcheckfiles_mini.sh)
 
 check:
-	(cd ../../lib; python2 -m unittest maskTests)
+	(cd ../../lib; python3 -m unittest maskTests)
 	(rm ../../lib/testImg*.png)
 	(./test_init.sh)
 	(./maskcompcheckfiles_0.sh)

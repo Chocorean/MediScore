@@ -1,7 +1,7 @@
 #!/bin/bash
 
 clean=TRUE
-mypython='python2 -OO'
+mypython='python3 -OO'
 
 check_file(){
     ref_file=$1
