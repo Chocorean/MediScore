@@ -1,4 +1,11 @@
-sklearn
-scipy==1.4.1
-matplotlib==3.2.0
+bokeh==0.12.13
+configparser==3.5.0
+Glymur==0.8.12
 jsonschema==2.5.1
+matplotlib==2.0.0
+numpngw==0.0.8
+numpy==1.18.4
+opencv-python==3.4.2.16
+pandas==1.0.3
+rawpy==0.14.0
+scikit-learn==0.22
