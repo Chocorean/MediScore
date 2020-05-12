@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 import sys
 import os
@@ -53,7 +53,7 @@ def antiforensic_donor_filter(edge_list):
     ins = group_by_fun(lambda e: e["target"], edge_list)
 
     def _filter(edge):
-        return edge["op"] == "Donor" and len(filter(lambda e: e["op"][0:12] == "AntiForensic", ins.get(edge["target"], []))) > 0
+        return edge["op"] == "Donor" and len(list(filter(lambda e: e["op"][0:12] == "AntiForensic", ins.get(edge["target"], [])))) > 0
 
     return map(_filter, edge_list)
 
@@ -291,8 +291,25 @@ if __name__ == '__main__':
                          "LinkConfidence": sys_link_record["relationshipConfidenceScore"] if sys_link != None else None,
                          "Mapping": _get_mapping(ref_link, sys_link) }
 
-            output_node_mapping_records += sorted([ _build_node_map_record(*node_map) for node_map in node_mapping ])
-            output_link_mapping_records += sorted([ _build_link_map_record(*edge_map) for edge_map in edge_mapping ])
+            tmp = [_build_node_map_record(*node_map) for node_map in node_mapping]
+            tmp.sort(key=lambda x: (x.get('WorldFileID'), x.get('SourceWorldFileID')), reverse=False)
+            output_node_mapping_records += tmp
+            tmp = [_build_link_map_record(*edge_map) for edge_map in edge_mapping]
+            for dic in tmp:
+                dic['LinkConfidence'] = str(dic['LinkConfidence']) if dic['LinkConfidence'] is not None else ''
+            print(tmp)
+            tmp.sort(key=lambda x: (x.get('SourceWorldFileID'), x.get('TargetWorldFileID')), reverse=False)
+            print('---')
+            print(tmp)
+            tmp.sort(key=lambda x: (x.get('LinkConfidence'), x.get('SourceWorldFileID'), x.get('TargetWorldFileID')), reverse=False)
+            print('---')
+            print(tmp)
+            for dic in tmp:
+                try:
+                    dic['LinkConfidence'] = float(dic['LinkConfidence']) if '.' in dic['LinkConfidence'] else int(dic['LinkConfidence'])
+                except ValueError:
+                    dic['LinkConfidence'] = None
+            output_link_mapping_records += tmp
 
             out_rec = { "JournalName": trial.JournalName,
                         "ProvenanceProbeFileID": trial.ProvenanceProbeFileID,

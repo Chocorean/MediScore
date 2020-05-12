@@ -52,7 +52,7 @@ diff_csv(){
 base_manip_test() {
     echo 'basic manip test'
     #test csv
-    run_test "python2 get_dims_from_probes.py\
+    run_test "python3 get_dims_from_probes.py\
  -t manipulation\
  --refDir $testsuite_directory\
  -r reference/manipulation-image/MFC18-manipulation-image-ref.csv\
@@ -62,7 +62,7 @@ base_manip_test() {
     diff_csv sample_manip_viz_db_refdims.csv $testsuite_directory/compcheckfiles/visualizer_check_files/ref_manip_base.csv manip_viz
 
     #test HTML
-    run_test "python2 get_html_from_probefiles.py\
+    run_test "python3 get_html_from_probefiles.py\
  -t manipulation\
  --refDir $testsuite_directory\
  -rx sample_manip_viz_db_refdims.csv\
@@ -73,7 +73,7 @@ base_manip_test() {
 base_splice_test() {
     echo 'basic splice test'
     #test csv
-    run_test "python2 get_dims_from_probes.py\
+    run_test "python3 get_dims_from_probes.py\
  -t splice\
  --refDir $testsuite_directory\
  -r reference/splice/NC2017-splice-ref.csv\
@@ -83,7 +83,7 @@ base_splice_test() {
     diff_csv sample_splice_viz_db_refdims.csv $testsuite_directory/compcheckfiles/visualizer_check_files/ref_splice_base.csv splice_viz
 
     #test HTML
-    run_test "python2 get_html_from_probefiles.py\
+    run_test "python3 get_html_from_probefiles.py\
  -t splice\
  --refDir $testsuite_directory\
  -rx sample_splice_viz_db_refdims.csv\

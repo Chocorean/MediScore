@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 """
  *File: metricRunner.py
@@ -214,7 +214,7 @@ class maskMetricRunner:
             #only need colors if selectively scoring
             myprintbuffer.append("Fetching {}FileID {} from mask data...".format(mymode,probeID))
             if self.mode != 2: #NOTE: temporary measure until we get splice sorted out.
-		color_purpose = self.journalData.query("{}FileID=='{}'".format(mymode,probeID))
+                color_purpose = self.journalData.query("{}FileID=='{}'".format(mymode,probeID))
             if not self.usejpeg2000:
                 #NOTE: temporary measure for splice task
                 if self.mode == 1:
@@ -678,7 +678,7 @@ class maskMetricRunner:
             return maskRow
 
     def scoreMoreMasks(self,maskData):
-        return maskData.apply(self.scoreOneMask,axis=1,reduce=False)
+        return maskData.apply(self.scoreOneMask,axis=1)
 
     def scoreMasks(self,maskData,processors):
         maxprocs = max(multiprocessing.cpu_count() - 2,1)
@@ -693,7 +693,7 @@ class maskMetricRunner:
 
         if processors == 1:
             #case for one processor for efficient debugging and to eliminate overhead when running
-            maskData = maskData.apply(self.scoreOneMask,axis=1,reduce=False)
+            maskData = maskData.apply(self.scoreOneMask,axis=1)
         else:
             #split maskData into array of dataframes based on number of processors (and rows in the file)
             chunksize = nrow//processors
@@ -1398,10 +1398,10 @@ class maskMetricRunner:
                                       'noScoreZone' : os.path.basename(weightFName),
                                       'colorMask' : os.path.basename(colMaskName),
                                       'met_table' : met_table,
-#  				      'nmm' : round(metrics['NMM'],3),
-#  				      'mcc' : round(metrics['MCC'],3),
-#  				      'bwL1' : round(metrics['BWL1'],3),
-#  				      'gwL1' : round(metrics['GWL1'],3),
+#                        'nmm' : round(metrics['NMM'],3),
+#                        'mcc' : round(metrics['MCC'],3),
+#                        'bwL1' : round(metrics['BWL1'],3),
+#                        'gwL1' : round(metrics['GWL1'],3),
                                       'syspfx' : syspfx,
                                       'totalPixels' : totalpx,
                                       'conftable':conf_table,
@@ -1654,6 +1654,7 @@ class maskMetricRunner:
         try:
             refmat = ref.matrix
             if not self.usejpeg2000:
+                import sys
                 modified = cv2.addWeighted(refmat,alpha,m3chan,1-alpha,0)
                 myagg[refbw==0] = modified[refbw==0]
                 compositeMaskName = "_".join([outputMaskBase,"composite.jpg"])

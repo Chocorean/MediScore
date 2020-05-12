@@ -1,4 +1,5 @@
 import collections
+from functools import reduce
 
 def group_by_fun(fun, inlist):
     d = {}
@@ -76,7 +77,7 @@ def reject_edges(edge_list, edge_list_filters=[], edge_filters=[]):
         return map(lambda edge: any(map(lambda f: f(edge), edge_filters)), edge_list)
 
     edge_list_filters.append(composed_edge_list_filter)
-    return map(any, zip(*map(lambda f: f(edge_list), edge_list_filters)))
+    return list(map(any, zip(*map(lambda f: f(edge_list), edge_list_filters))))
 
 def detect_cycle(edge_records):
     edge_set = set(edge_records)

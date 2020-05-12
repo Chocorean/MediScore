@@ -6,6 +6,5 @@ matplotlib==2.0.0
 numpngw==0.0.8
 numpy==1.18.4
 opencv-python==3.4.2.16
-pandas==1.0.3
-rawpy==0.14.0
+pandas==0.25.1
 scikit-learn==0.22

@@ -1,6 +1,6 @@
 #!/bin/bash
 procs=4
-mypython=python2
+mypython=python3
 source test_init.sh
 
 echo

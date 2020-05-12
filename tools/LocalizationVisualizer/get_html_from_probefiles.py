@@ -269,7 +269,7 @@ def gen_home_page(df,outdir,reduce_redundancy=False):
     col_order = firstcols + addcols + whcols + valid_cols
     df_out = df_out[col_order]
         
-    home_page = open(os.path.join(outdir,'homepage.html'),'w+')
+    home_page = open(os.path.join(outdir,'homepage.html'),'wb+')
     home_page.write(df_out.to_html(escape=False,na_rep='').replace("text-align: right;","text-align: center;").encode('utf-8'))
     home_page.close()
 

@@ -21,19 +21,19 @@ def miss_selector(t):
     return (r != None and s == None)
 
 def num_ref(mapping):
-    return len(filter(ref_selector, mapping))
+    return len(list(filter(ref_selector, mapping)))
 
 def num_sys(mapping):
-    return len(filter(sys_selector, mapping))
+    return len(list(filter(sys_selector, mapping)))
 
 def num_corr(mapping):
-    return len(filter(corr_selector, mapping))
+    return len(list(filter(corr_selector, mapping)))
 
 def num_miss(mapping):
-    return len(filter(miss_selector, mapping))
+    return len(list(filter(miss_selector, mapping)))
 
 def num_fa(mapping):
-    return len(filter(fa_selector, mapping))
+    return len(list(filter(fa_selector, mapping)))
 
 def set_similarity_overlap(mapping):
     return 2 * np.float64(num_corr(mapping)) / (num_ref(mapping) + num_sys(mapping))

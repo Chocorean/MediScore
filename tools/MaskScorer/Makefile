@@ -9,13 +9,13 @@ MAKE=make
 #	(./maskcompcheckfiles_mini.sh)
 
 check:
-	(cd ../../lib; python3 -m unittest maskTests)
-	(rm ../../lib/testImg*.png)
-	(./test_init.sh)
+	#(cd ../../lib; python3 -m unittest maskTests)
+	#(rm ../../lib/testImg*.png)
+	#(./test_init.sh)
 	(./maskcompcheckfiles_0.sh)
-	(./maskcompcheckfiles_1.sh)
-	(./maskcompcheckfiles_2.sh)
-	(./maskcompcheckfiles_3.sh)
+	#(./maskcompcheckfiles_1.sh)
+	#(./maskcompcheckfiles_2.sh)
+	#(./maskcompcheckfiles_3.sh)
 
 render_readmes_to_html:
 	(jupyter-nbconvert --to html MaskScorerReadMe.ipynb)

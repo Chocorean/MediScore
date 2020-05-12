@@ -5,10 +5,10 @@ MAKE=make
 
 check:
 	@(echo "** Running UnitTests **\n")
-	(python2 ../../lib/ProvenanceGraphBuildingUnitTest.py)
+	(python3 ../../lib/ProvenanceGraphBuildingUnitTest.py)
 	# Ignoring warnings here as we divide by zero for some tests,
 	# which produce warnings
-	(python2 -W ignore ../../lib/ProvenanceMetricsUnitTest.py)
+	(python3 -W ignore ../../lib/ProvenanceMetricsUnitTest.py)
 	@(echo "** Running integration tests **\n")
 	@(./run_integration_tests.sh)
 	@(echo "** Running integration tests for validator **\n")

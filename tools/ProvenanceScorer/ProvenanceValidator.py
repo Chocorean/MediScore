@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import sys
 import os
 lib_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../Validator")

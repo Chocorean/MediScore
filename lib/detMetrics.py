@@ -4,7 +4,7 @@
 
 import numpy as np
 #import scipy.stats as st
-#import sys
+import sys
 #import time
 
 
@@ -160,9 +160,9 @@ class Metrics:
         target_num = label[label == 1].size
         nontarget_num = label[label == 0].size
         # print("Total# ({}),  Target# ({}),  NonTarget# ({}) \n".format(
-        #    label.size, target_num, nontarget_num))
-
+        #    label.size, target_num, nontarget_num))[1 0 1 0]
         fpr, tpr, thres = roc_curve(label, score)
+        #print(fpr, tpr, file=sys.stderr)
         fnr = 1 - tpr
         return fpr, tpr, fnr, thres, target_num, nontarget_num
 

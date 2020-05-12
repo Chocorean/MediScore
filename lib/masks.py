@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 """
  *File: masks.py
@@ -837,7 +837,7 @@ class refmask(mask):
         #but this won't represent all colors, so max with the max bit in self.bitlist
         top_bit = max([int(math.floor(math.log(top_px,2))),int(max(self.bitplanes) - 1)]) + 1
 #        top_bit = int(math.floor(math.log(max(self.bitlist),2))) + 1
-        notcolors = range(1,top_bit + 1) #up to and including top_bit
+        notcolors = list(range(1,top_bit + 1)) #up to and including top_bit
         notcolors_b = [ 1 << (b - 1) for b in notcolors ]
         printq("Colors to consider: {}".format(notcolors_b))
 
